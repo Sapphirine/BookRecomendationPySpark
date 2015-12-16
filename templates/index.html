@@ -13,16 +13,24 @@
 	charset="utf-8"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-<script type="text/babel" src="js/util.js"></script>
+<script type="text/babel" src="lib/util.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/jquery.raty.css">
+<script src="lib/jquery.raty.js"></script>
 <title>Book Recommendation</title>
 </head>
 <body>
-	<div id="navbar">navbar</div>
-	<a href="logout">Logout</a>
+	<nav className="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+      			<div class="navbar-brand" >Book Recommender</div>
+    		</div>
+			<div class="nav navbar-nav navbar-right"><a class="navbar-brand" href="logout">Logout</a></div>
+		</div>
+	</nav>
 	<div id="recommendList">recommendList</div>
 </body>
 </html>

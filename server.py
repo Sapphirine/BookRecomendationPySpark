@@ -50,11 +50,14 @@ def getRecommendation():
 
 @app.route("/rate",methods=['POST'])
 def rate():
-	return "user x rate y on movie z"
+	return "user "+ session['username']+" rate book "+request.form['bookid']+" with score "+request.form['score']
 
-@app.route('/js/<path:path>')
+@app.route('/<path:path>')
 def send_js(path):
-    return send_from_directory('js', path)
+	if path.endswith('png'):
+		return send_from_directory('lib/image', path)
+	else:
+		return send_from_directory('./', path)
 
 if __name__ == "__main__":
     app.run(port = 5003)
