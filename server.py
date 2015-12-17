@@ -1,6 +1,12 @@
 from flask import Flask,render_template, session, request, redirect, url_for, send_from_directory
-from cloudDatabaseUtil import loginReader, registerReader, rateBook
+from cloudDatabaseUtil import loginReader, registerReader, rateBook, getRating
+from app import BigDataProcessor
+import os, sys
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+
 app = Flask(__name__)
+sparkCore = BigDataProcessor()
 
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 
@@ -47,7 +53,10 @@ def register():
 
 @app.route("/getRecommendation",methods=['GET'])
 def getRecommendation():
-	return "recommendation list in json"
+	if (len(getRating(session['username']))==0):
+		return sparkCore.collaborativeFilter([(0,1,5)])
+	else:
+		return sparkCore.collaborativeFilter(getRating(session['username']))
 
 @app.route("/rate",methods=['POST'])
 def rate():
