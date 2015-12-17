@@ -12,8 +12,8 @@ class  BigDataProcessor(object):
     #ratings_path = "file:///Users/acton/Documents/BX/RatingsNew.csv"
     #books_path = "file:///Users/acton/Documents/BX/BooksNew.csv"
     users_path = "file:///Users/acton/Documents/BX/Users.csv"
-    ratings_path = "file:///Users/zeweijiang/Documents/ratings.csv"
-    books_path = "file:///Users/zeweijiang/Documents/books.csv"
+    ratings_path = "file:///Users/acton/Documents/BX/RatingsNew.csv"
+    books_path = "file:///Users/acton/Documents/BX/BooksNew.csv"
     ratings = None
     books = None
 
@@ -87,10 +87,10 @@ class  BigDataProcessor(object):
 
         new_user_recommendations_rating_title_and_count_RDD = \
             new_user_recommendations_rating_title_and_count_RDD.map\
-                (lambda r: (r[1][0][0][0][0][1], r[1][0][0][0][0][0],r[1][0][0][0][1],r[1][0][0][1],r[1][0][1], r[1][1]))
+                (lambda r: (r[1][0][0][0][0][1], r[1][0][0][0][0][0],r[1][0][0][0][1],r[1][0][0][1],r[1][0][1], r[1][1],r[0]))
 
         top_books = new_user_recommendations_rating_title_and_count_RDD.filter(lambda r: r[5]>10).takeOrdered(25, key=lambda x: -x[1])
-        #return a jason list in of order of : book_name, predict_rating,author,publisher,url, review_cnt
+        #return a jason list in of order of : book_name, predict_rating,author,publisher,url, review_cnt, bookId
         print top_books
         return json.dumps(top_books)
 
