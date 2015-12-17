@@ -57,7 +57,7 @@ def rate():
 @app.route('/<path:path>')
 def send_js(path):
 	if path.endswith('png'):
-		return send_from_directory('lib/image', path)
+		return send_from_directory('lib/images', path)
 	else:
 		return send_from_directory('./', path)
 
