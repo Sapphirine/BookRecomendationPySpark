@@ -1,4 +1,5 @@
 from flask import Flask,render_template, session, request, redirect, url_for, send_from_directory
+from cloudDatabaseUtil import loginReader, registerReader, rateBook
 app = Flask(__name__)
 
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
@@ -17,11 +18,11 @@ def login():
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
-		#if 1==1:
-		session['username'] = username
-		return redirect(url_for('index'))
-		#else:
-		#return render_template('login.html')
+		if(loginReader(username, password)):
+			session['username'] = username
+			return redirect(url_for('index'))
+		else:
+			return render_template('login.html')
 	else:
 		return render_template('login.html')
 
@@ -37,10 +38,10 @@ def register():
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
-		#if success
-		#return render_template('login.html')
-		#else:
-		return render_template('register.html')
+		if (registerReader(username, password)):
+			return render_template('login.html')
+		else:
+			return render_template('register.html')
 	else:
 		return render_template('register.html')
 
@@ -50,7 +51,8 @@ def getRecommendation():
 
 @app.route("/rate",methods=['POST'])
 def rate():
-	return "user "+ session['username']+" rate book "+request.form['bookid']+" with score "+request.form['score']
+	rateBook(session['username'], request.form['bookid'], request.form['score'])
+	print  ("user "+ session['username']+" rate book "+request.form['bookid']+" with score "+request.form['score'])
 
 @app.route('/<path:path>')
 def send_js(path):
@@ -60,4 +62,4 @@ def send_js(path):
 		return send_from_directory('./', path)
 
 if __name__ == "__main__":
-    app.run(port = 5003)
+    app.run(port = 5004)
