@@ -60,8 +60,11 @@ def getRecommendation():
 
 @app.route("/rate",methods=['POST'])
 def rate():
-	rateBook(session['username'], request.form['bookid'], request.form['score'])
-	print  ("user "+ session['username']+" rate book "+request.form['bookid']+" with score "+request.form['score'])
+	if (rateBook(session['username'], request.form['bookid'], request.form['score'])):
+		return "rate successful"
+	else:
+		return "rate fail"
+
 
 @app.route('/<path:path>')
 def send_js(path):

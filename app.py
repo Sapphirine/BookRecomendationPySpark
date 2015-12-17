@@ -12,8 +12,8 @@ class  BigDataProcessor(object):
     #ratings_path = "file:///Users/acton/Documents/BX/RatingsNew.csv"
     #books_path = "file:///Users/acton/Documents/BX/BooksNew.csv"
     users_path = "file:///Users/acton/Documents/BX/Users.csv"
-    ratings_path = "file:///Users/acton/Documents/BX/RatingsNew.csv"
-    books_path = "file:///Users/acton/Documents/BX/BooksNew.csv"
+    ratings_path = "file:///Users/zeweijiang/Documents/ratings.csv"
+    books_path = "file:///Users/zeweijiang/Documents/books.csv"
     ratings = None
     books = None
 
